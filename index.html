@@ -139,6 +139,7 @@
             object-fit: contain;
         }
 
+        /* ===== SLIDE 1 ===== */
         .slide-1-content {
             position: relative;
             z-index: 10;
@@ -193,20 +194,11 @@
             z-index: 10;
         }
 
-        .main-button:hover {
-            transform: scale(1.05);
-        }
+        .main-button:hover { transform: scale(1.05); }
+        .main-button:active { transform: scale(0.95); }
+        .main-button img { width: 100%; height: 100%; object-fit: contain; }
 
-        .main-button:active {
-            transform: scale(0.95);
-        }
-
-        .main-button img {
-            width: 100%;
-            height: 100%;
-            object-fit: contain;
-        }
-
+        /* ===== SLIDER ===== */
         .slider-wrapper {
             position: relative;
             width: 100%;
@@ -248,21 +240,11 @@
             transition: none;
         }
 
-        .slider-knob:active {
-            cursor: grabbing;
-        }
+        .slider-knob:active { cursor: grabbing; }
+        .slider-knob img { width: 100%; height: 100%; object-fit: contain; pointer-events: none; }
+        .slider-knob.snapping { transition: left 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
 
-        .slider-knob img {
-            width: 100%;
-            height: 100%;
-            object-fit: contain;
-            pointer-events: none;
-        }
-
-        .slider-knob.snapping {
-            transition: left 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
+        /* ===== SLIDE 2 ===== */
         .slide-2-content {
             position: relative;
             z-index: 10;
@@ -295,6 +277,7 @@
             padding: 120px 20px 40px;
         }
 
+        /* ===== SLIDE 3 ===== */
         .slide-3-content {
             position: relative;
             z-index: 10;
@@ -321,15 +304,10 @@
             text-shadow: 0 2px 8px rgba(0,0,0,0.15);
         }
 
-        .slide-3-text p {
-            margin-bottom: 10px;
-        }
+        .slide-3-text p { margin-bottom: 10px; }
+        .slide-3-text .closing { margin-top: 40px; font-size: 26px; }
 
-        .slide-3-text .closing {
-            margin-top: 40px;
-            font-size: 26px;
-        }
-
+        /* ===== QUIZ ===== */
         .slide-quiz-content {
             position: relative;
             z-index: 10;
@@ -369,13 +347,22 @@
             z-index: 10;
             width: 100%;
             max-width: 1400px;
-            height: 100%;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
             padding: 40px 20px;
             margin: 0 auto;
+        }
+
+        #slide14 .slide-1-center {
+            width: 100%;
+            max-width: 1100px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 30px;
         }
 
         .slide-final-title {
@@ -388,12 +375,10 @@
             text-shadow: 0 2px 8px rgba(0,0,0,0.15);
             margin-bottom: 0;
             line-height: 1.5;
-            position: absolute;
-            top: -150px;
-            left: 50%;
-            transform: translateX(-50%);
+            position: static;
+            transform: none;
             width: 100%;
-            white-space: nowrap;
+            white-space: normal;
         }
 
         .final-button {
@@ -409,21 +394,9 @@
             z-index: 10;
         }
 
-        .final-button:hover {
-            transform: scale(1.05);
-        }
-
-        .final-button:active {
-            transform: scale(0.92);
-            transition: transform 0.1s ease;
-        }
-
-        .final-button img {
-            width: 100%;
-            height: 100%;
-            object-fit: contain;
-            pointer-events: none;
-        }
+        .final-button:hover { transform: scale(1.05); }
+        .final-button:active { transform: scale(0.92); transition: transform 0.1s ease; }
+        .final-button img { width: 100%; height: 100%; object-fit: contain; pointer-events: none; }
 
         .btn-ring-wrap {
             position: relative;
@@ -449,23 +422,23 @@
 
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(6px) scale(0.98); }
-            to { opacity: 1; transform: translateY(0) scale(1); }
+            to   { opacity: 1; transform: translateY(0) scale(1); }
         }
 
-        .slide.active {
-            animation: fadeIn 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-        }
+        .slide.active { animation: fadeIn 0.5s cubic-bezier(0.4, 0, 0.2, 1); }
 
-        .slider-knob {
-            animation: pulse 2s ease-in-out infinite;
-        }
+        .slider-knob { animation: pulse 2s ease-in-out infinite; }
 
         @keyframes pulse {
             0%, 100% { transform: translate(-50%, -50%) scale(1); }
-            50% { transform: translate(-50%, -50%) scale(1.03); }
+            50%       { transform: translate(-50%, -50%) scale(1.03); }
         }
 
-        /* ===== Tablete (max 1024px) ===== */
+        /* ========================================
+           RESPONSIVE — DOAR ADĂUGIRI PE DEASUPRA
+        ======================================== */
+
+        /* Tablete mari (max 1024px) */
         @media (max-width: 1024px) {
             .slide-1-title, .slide-2-title, .quiz-title, .slide-3-text, .slide-final-title { font-size: 20px; }
             .main-button, .final-button { width: 170px; height: 170px; }
@@ -473,21 +446,23 @@
             .slider-track { height: 140px; }
             .lang-btn { width: 60px; height: 38px; }
             .warning-text { font-size: 16px; }
-            .btn-ring-wrap { margin-top: 0; }
             .btn-ring-back { width: 215px; height: 215px; }
-            .slide-1-title, .slide-2-title, .quiz-title { top: -45px; }
-            .slide-final-title { top: -60px; }
+            .slide-1-title { top: -130px; }
+            .slide-2-title, .quiz-title { top: 5px; }
+            .slide-final-title { white-space: normal; }
         }
 
-        /* ===== Tablete mici / Landscape mobil (max 768px) ===== */
+        /* Tablete mici / Landscape mobil (max 768px) */
         @media (max-width: 768px) {
-            .slide-1-title, .slide-2-title, .quiz-title { font-size: 17px; letter-spacing: 1.5px; }
-            .slide-3-text, .slide-final-title { font-size: 17px; line-height: 1.5; }
-            .main-button, .final-button { width: 140px; height: 140px; margin-top: 40px; }
+            .slide-1-title, .slide-2-title, .quiz-title { font-size: 17px; letter-spacing: 1.5px; white-space: normal; text-align: center; }
+            .slide-3-text { font-size: 17px; line-height: 1.5; }
+            .slide-final-title { font-size: 17px; line-height: 1.5; white-space: normal; }
+            .main-button, .final-button { width: 140px; height: 140px; }
             .slider-wrapper { max-width: 100%; padding: 0 15px; }
             .slider-knob { width: 130px; height: 130px; }
             .slider-track { height: 115px; }
-            .slide-2-title, .quiz-title { transform: translateX(-50%); top: -38px; }
+            .slide-2-title { top: 5px; padding: 80px 20px 20px; }
+            .quiz-title { top: 5px; padding: 80px 20px 20px; }
             .warning-band.band-quiz { height: 80px; }
             .warning-band.band-final { height: 120px; }
             .warning-text { font-size: 13px; padding: 0 12px; }
@@ -495,19 +470,22 @@
             .lang-btn { width: 50px; height: 32px; }
             .slide-3-content { padding: 20px; }
             .slide-3-text .closing { margin-top: 28px; font-size: 21px; }
-            .slide-1-title { top: -50px; }
-            .slide-final-title { top: -50px; }
+            .slide-1-title { top: -110px; }
+            .btn-ring-back { width: 185px; height: 185px; }
+            #slide14 .slide-1-center { gap: 20px; }
         }
 
-        /* ===== Telefoane portrait (max 480px) ===== */
+        /* Telefoane portrait (max 480px) */
         @media (max-width: 480px) {
-            .slide-1-title, .slide-2-title, .quiz-title { font-size: 14px; letter-spacing: 1px; }
-            .slide-3-text, .slide-final-title { font-size: 14px; }
-            .main-button, .final-button { width: 120px; height: 120px; margin-top: 30px; }
+            .slide-1-title, .slide-2-title, .quiz-title { font-size: 14px; letter-spacing: 1px; white-space: normal; }
+            .slide-3-text { font-size: 14px; }
+            .slide-final-title { font-size: 14px; white-space: normal; }
+            .main-button, .final-button { width: 120px; height: 120px; }
             .btn-ring-back { width: 155px; height: 155px; }
             .slider-knob { width: 110px; height: 110px; }
             .slider-track { height: 95px; }
-            .slide-2-title, .quiz-title { transform: translateX(-50%); top: -30px; }
+            .slide-2-title { top: 5px; padding: 60px 16px 16px; }
+            .quiz-title { top: 5px; padding: 60px 16px 16px; }
             .warning-band.band-quiz { height: 68px; }
             .warning-band.band-final { height: 100px; }
             .warning-text { font-size: 10px; letter-spacing: 0.2px; padding: 0 8px; }
@@ -516,11 +494,11 @@
             .slide-3-text .closing { margin-top: 22px; font-size: 18px; }
             .slide-bg-cercuri { width: 98%; }
             .lang-buttons { top: 10px; right: 10px; gap: 6px; }
-            .slide-1-title { top: -40px; }
-            .slide-final-title { top: -60px; }
+            .slide-1-title { top: -90px; }
+            #slide14 .slide-1-center { gap: 16px; }
         }
 
-        /* ===== Telefoane foarte mici (max 360px) ===== */
+        /* Telefoane foarte mici (max 360px) */
         @media (max-width: 360px) {
             .slide-1-title, .slide-2-title, .quiz-title { font-size: 11px; letter-spacing: 0.5px; }
             .slide-3-text, .slide-final-title { font-size: 11px; }
@@ -530,77 +508,70 @@
             .warning-text { font-size: 8px; padding: 0 6px; }
             .lang-btn { width: 36px; height: 22px; }
             .btn-ring-back { width: 125px; height: 125px; }
-            .slide-2-title, .quiz-title { transform: translateX(-50%); top: -25px; }
+            .slide-2-title { padding: 50px 12px 12px; }
+            .quiz-title { padding: 50px 12px 12px; }
             .warning-band.band-quiz { height: 55px; }
             .warning-band.band-final { height: 85px; }
-            .slide-1-title { top: -35px; }
-            .slide-final-title { top: -50px; }
+            .slide-1-title { top: -75px; }
         }
 
-        /* ===== Landscape telefon (toate celelalte slideuri - NESCHIMBAT) ===== */
+        /* Landscape telefon — ecran scund */
         @media (max-height: 500px) and (orientation: landscape) {
-            .main-button, .final-button { width: 90px; height: 90px; margin-top: 5px; }
+            .main-button, .final-button { width: 90px; height: 90px; }
             .slider-knob { width: 90px; height: 90px; }
             .slider-track { height: 75px; }
-            .slide-2-title, .quiz-title { transform: translateX(-50%); top: -22px; font-size: 12px; }
+            .slide-2-title, .quiz-title { font-size: 12px; padding: 40px 16px 10px; }
             .warning-band.band-quiz { height: 50px; }
             .warning-band.band-final { height: 70px; }
             .warning-text { font-size: 8px; }
-            .slide-1-title { font-size: 12px; margin-top: 0; top: -30px; }
-            .slide-final-title { top: -30px; font-size: 12px; }
+            .slide-1-title { font-size: 12px; top: -55px; }
+            .slide-final-title { font-size: 12px; }
             .btn-ring-back { width: 115px; height: 115px; }
             .lang-buttons { top: 8px; right: 8px; }
             .lang-btn { width: 40px; height: 26px; }
-        }
 
-        /* ===== SLIDE 14: Landscape fix — titlu centrat, layout vertical compact ===== */
-        @media (max-height: 500px) and (orientation: landscape) {
-            #slide14 .slide-final-content {
-                justify-content: center;
-                padding: 8px 20px;
-            }
-
+            /* Slide 14 landscape: același ca desktop — coloană centrată */
             #slide14 .slide-1-center {
-                flex-direction: row;
-                align-items: center;
-                justify-content: center;
-                gap: 24px;
-                width: 100%;
+                flex-direction: column;
+                gap: 12px;
+                max-width: 900px;
+                margin: 0 auto;
             }
-
             #slide14 .slide-final-title {
-                position: static;
-                transform: none;
-                left: auto;
-                top: auto;
                 font-size: 10px;
-                line-height: 1.5;
+                line-height: 1.4;
                 letter-spacing: 0.5px;
                 white-space: normal;
                 text-align: center;
-                width: auto;
-                max-width: 55%;
-                flex-shrink: 1;
+                width: 100%;
             }
+            #slide14 .btn-ring-wrap { flex-shrink: 0; }
+            #slide14 .final-button { width: 75px; height: 75px; }
+            #slide14 .btn-ring-back { width: 100px; height: 100px; }
+        }
 
-            #slide14 .btn-ring-wrap {
-                flex-shrink: 0;
-                margin-top: 0;
+        /* Slide 1 landscape: titlu deasupra butonului, nu sare din ecran */
+        @media (max-height: 500px) and (orientation: landscape) {
+            .slide-1-center { gap: 0; }
+            .slide-1-title { 
+                top: auto;
+                position: relative;
+                left: auto;
+                transform: none;
+                margin-bottom: 8px;
+                font-size: 12px;
+                white-space: normal;
+                text-align: center;
+                width: 100%;
             }
-
-            #slide14 .final-button {
-                width: 80px;
-                height: 80px;
-                margin-top: 0;
-            }
-
-            #slide14 .btn-ring-back {
-                width: 105px;
-                height: 105px;
+            .slide-1-content {
+                flex-direction: column;
+                justify-content: center;
+                gap: 8px;
             }
         }
     </style>
-<base target="_blank">
+    <base target="_blank">
 </head>
 <body>
 
@@ -691,9 +662,7 @@
                 <div class="slider-wrapper" id="quiz0SliderWrapper">
                     <img src="roelemente.png" alt="" class="slider-bg-img">
                     <div class="slider-track" id="quiz0SliderTrack"></div>
-                    <div class="slider-knob" id="quiz0SliderKnob">
-                        <img src="rob3.png" alt="Icon">
-                    </div>
+                    <div class="slider-knob" id="quiz0SliderKnob"><img src="rob3.png" alt="Icon"></div>
                 </div>
             </div>
         </div>
@@ -711,9 +680,7 @@
                 <div class="slider-wrapper" id="quiz1SliderWrapper">
                     <img src="roelemente.png" alt="" class="slider-bg-img">
                     <div class="slider-track" id="quiz1SliderTrack"></div>
-                    <div class="slider-knob" id="quiz1SliderKnob">
-                        <img src="rob3.png" alt="Icon">
-                    </div>
+                    <div class="slider-knob" id="quiz1SliderKnob"><img src="rob3.png" alt="Icon"></div>
                 </div>
             </div>
         </div>
@@ -731,9 +698,7 @@
                 <div class="slider-wrapper" id="quiz2SliderWrapper">
                     <img src="roelemente.png" alt="" class="slider-bg-img">
                     <div class="slider-track" id="quiz2SliderTrack"></div>
-                    <div class="slider-knob" id="quiz2SliderKnob">
-                        <img src="rob4.png" alt="Icon">
-                    </div>
+                    <div class="slider-knob" id="quiz2SliderKnob"><img src="rob4.png" alt="Icon"></div>
                 </div>
             </div>
         </div>
@@ -751,9 +716,7 @@
                 <div class="slider-wrapper" id="quiz3SliderWrapper">
                     <img src="roelemente.png" alt="" class="slider-bg-img">
                     <div class="slider-track" id="quiz3SliderTrack"></div>
-                    <div class="slider-knob" id="quiz3SliderKnob">
-                        <img src="rob4.png" alt="Icon">
-                    </div>
+                    <div class="slider-knob" id="quiz3SliderKnob"><img src="rob4.png" alt="Icon"></div>
                 </div>
             </div>
         </div>
@@ -771,9 +734,7 @@
                 <div class="slider-wrapper" id="quiz4SliderWrapper">
                     <img src="roelemente.png" alt="" class="slider-bg-img">
                     <div class="slider-track" id="quiz4SliderTrack"></div>
-                    <div class="slider-knob" id="quiz4SliderKnob">
-                        <img src="rob5.png" alt="Icon">
-                    </div>
+                    <div class="slider-knob" id="quiz4SliderKnob"><img src="rob5.png" alt="Icon"></div>
                 </div>
             </div>
         </div>
@@ -791,9 +752,7 @@
                 <div class="slider-wrapper" id="quiz5SliderWrapper">
                     <img src="roelemente.png" alt="" class="slider-bg-img">
                     <div class="slider-track" id="quiz5SliderTrack"></div>
-                    <div class="slider-knob" id="quiz5SliderKnob">
-                        <img src="rob5.png" alt="Icon">
-                    </div>
+                    <div class="slider-knob" id="quiz5SliderKnob"><img src="rob5.png" alt="Icon"></div>
                 </div>
             </div>
         </div>
@@ -811,9 +770,7 @@
                 <div class="slider-wrapper" id="quiz6SliderWrapper">
                     <img src="roelemente.png" alt="" class="slider-bg-img">
                     <div class="slider-track" id="quiz6SliderTrack"></div>
-                    <div class="slider-knob" id="quiz6SliderKnob">
-                        <img src="rob6.png" alt="Icon">
-                    </div>
+                    <div class="slider-knob" id="quiz6SliderKnob"><img src="rob6.png" alt="Icon"></div>
                 </div>
             </div>
         </div>
@@ -831,9 +788,7 @@
                 <div class="slider-wrapper" id="quiz7SliderWrapper">
                     <img src="roelemente.png" alt="" class="slider-bg-img">
                     <div class="slider-track" id="quiz7SliderTrack"></div>
-                    <div class="slider-knob" id="quiz7SliderKnob">
-                        <img src="rob6.png" alt="Icon">
-                    </div>
+                    <div class="slider-knob" id="quiz7SliderKnob"><img src="rob6.png" alt="Icon"></div>
                 </div>
             </div>
         </div>
@@ -851,9 +806,7 @@
                 <div class="slider-wrapper" id="quiz8SliderWrapper">
                     <img src="roelemente.png" alt="" class="slider-bg-img">
                     <div class="slider-track" id="quiz8SliderTrack"></div>
-                    <div class="slider-knob" id="quiz8SliderKnob">
-                        <img src="rob7.png" alt="Icon">
-                    </div>
+                    <div class="slider-knob" id="quiz8SliderKnob"><img src="rob7.png" alt="Icon"></div>
                 </div>
             </div>
         </div>
@@ -871,9 +824,7 @@
                 <div class="slider-wrapper" id="quiz9SliderWrapper">
                     <img src="roelemente.png" alt="" class="slider-bg-img">
                     <div class="slider-track" id="quiz9SliderTrack"></div>
-                    <div class="slider-knob" id="quiz9SliderKnob">
-                        <img src="rob7.png" alt="Icon">
-                    </div>
+                    <div class="slider-knob" id="quiz9SliderKnob"><img src="rob7.png" alt="Icon"></div>
                 </div>
             </div>
         </div>
