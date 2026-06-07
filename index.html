@@ -1,0 +1,1195 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ZYN Interactive</title>
+    <style>
+        @font-face {
+            font-family: 'IQOS-Bold';
+            src: url('IQOS-Bold 2.otf') format('opentype');
+            font-weight: bold;
+            font-style: normal;
+        }
+
+        @font-face {
+            font-family: 'IQOS-Regular';
+            src: url('IQOS-Regular 2.otf') format('opentype');
+            font-weight: normal;
+            font-style: normal;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html, body {
+            width: 100%;
+            height: 100%;
+            min-height: -webkit-fill-available;
+            overflow: hidden;
+            background: #00A9E0;
+        }
+
+        body {
+            font-family: 'IQOS-Bold', 'Arial Black', Arial, sans-serif;
+        }
+
+        .slide {
+            width: 100%;
+            height: 100vh;
+            height: 100dvh;
+            display: none;
+            flex-direction: column;
+            position: relative;
+            background-color: #00A9E0;
+        }
+
+        .slide.active {
+            display: flex;
+        }
+
+        .slide-bg-cercuri {
+            position: absolute;
+            top: calc(50% - 50px);
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 92%;
+            height: auto;
+            object-fit: contain;
+            object-position: center center;
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        .content-area {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+            z-index: 5;
+        }
+
+        .warning-band {
+            position: relative;
+            z-index: 100;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+
+        .warning-band.band-quiz {
+            height: 100px;
+            background-image: url('banda 1.png');
+        }
+
+        .warning-band.band-final {
+            height: 140px;
+            background-image: url('banda 2.png');
+        }
+
+        .warning-text {
+            font-family: 'IQOS-Regular', Arial, sans-serif;
+            font-size: 18px;
+            color: #00A9E0;
+            text-transform: uppercase;
+            line-height: 1.4;
+            text-align: center;
+            width: 100%;
+            max-width: 100%;
+            padding: 0 20px;
+            letter-spacing: 0.5px;
+        }
+
+        .lang-buttons {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            display: flex;
+            gap: 12px;
+            z-index: 50;
+        }
+
+        .lang-btn {
+            width: 70px;
+            height: 45px;
+            border: none;
+            background: transparent;
+            cursor: pointer;
+            padding: 0;
+            transition: transform 0.2s ease;
+        }
+
+        .lang-btn:hover {
+            transform: scale(1.1);
+        }
+
+        .lang-btn img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        .slide-1-content {
+            position: relative;
+            z-index: 10;
+            width: 100%;
+            max-width: 1400px;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 40px 20px;
+            margin: 0 auto;
+            gap: 0;
+        }
+
+        .slide-1-center {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            width: 100%;
+        }
+
+        .slide-1-title {
+            font-family: 'IQOS-Bold', 'Arial Black', Arial, sans-serif;
+            font-size: 22px;
+            color: #FFFFFF;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            text-align: center;
+            text-shadow: 0 2px 8px rgba(0,0,0,0.15);
+            margin-bottom: 0;
+            position: absolute;
+            top: -150px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100%;
+            white-space: nowrap;
+        }
+
+        .main-button {
+            width: 200px;
+            height: 200px;
+            border: none;
+            background: transparent;
+            cursor: pointer;
+            padding: 0;
+            transition: transform 0.2s ease;
+            margin-top: 0;
+            position: relative;
+            z-index: 10;
+        }
+
+        .main-button:hover {
+            transform: scale(1.05);
+        }
+
+        .main-button:active {
+            transform: scale(0.95);
+        }
+
+        .main-button img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        .slider-wrapper {
+            position: relative;
+            width: 100%;
+            max-width: 900px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            user-select: none;
+            -webkit-user-select: none;
+        }
+
+        .slider-bg-img {
+            width: 100%;
+            height: auto;
+            display: block;
+            pointer-events: none;
+        }
+
+        .slider-track {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 100%;
+            height: 160px;
+            cursor: pointer;
+        }
+
+        .slider-knob {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 180px;
+            height: 180px;
+            cursor: grab;
+            z-index: 20;
+            touch-action: none;
+            transition: none;
+        }
+
+        .slider-knob:active {
+            cursor: grabbing;
+        }
+
+        .slider-knob img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            pointer-events: none;
+        }
+
+        .slider-knob.snapping {
+            transition: left 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .slide-2-content {
+            position: relative;
+            z-index: 10;
+            width: 100%;
+            max-width: 1400px;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 40px 20px;
+            margin: 0 auto;
+        }
+
+        .slide-2-title {
+            font-family: 'IQOS-Bold', 'Arial Black', Arial, sans-serif;
+            font-size: 22px;
+            color: #FFFFFF;
+            text-transform: uppercase;
+            text-align: center;
+            letter-spacing: 3px;
+            text-shadow: 0 2px 8px rgba(0,0,0,0.15);
+            margin-bottom: 0;
+            position: absolute;
+            top: 5px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100%;
+            white-space: nowrap;
+            padding: 120px 20px 40px;
+        }
+
+        .slide-3-content {
+            position: relative;
+            z-index: 10;
+            width: 100%;
+            max-width: 900px;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 40px 20px;
+            margin: 0 auto;
+        }
+
+        .slide-3-text {
+            font-family: 'IQOS-Bold', 'Arial Black', Arial, sans-serif;
+            font-size: 22px;
+            color: #FFFFFF;
+            text-transform: uppercase;
+            line-height: 1.6;
+            text-align: center;
+            width: 100%;
+            letter-spacing: 1px;
+            text-shadow: 0 2px 8px rgba(0,0,0,0.15);
+        }
+
+        .slide-3-text p {
+            margin-bottom: 10px;
+        }
+
+        .slide-3-text .closing {
+            margin-top: 40px;
+            font-size: 26px;
+        }
+
+        .slide-quiz-content {
+            position: relative;
+            z-index: 10;
+            width: 100%;
+            max-width: 1400px;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 40px 20px;
+            margin: 0 auto;
+        }
+
+        .quiz-title {
+            font-family: 'IQOS-Bold', 'Arial Black', Arial, sans-serif;
+            font-size: 22px;
+            color: #FFFFFF;
+            text-transform: uppercase;
+            text-align: center;
+            letter-spacing: 2px;
+            text-shadow: 0 2px 8px rgba(0,0,0,0.15);
+            margin-bottom: 0;
+            position: absolute;
+            top: 5px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100%;
+            min-height: auto;
+            display: block;
+            padding: 120px 20px 40px;
+        }
+
+        /* ===== SLIDE FINAL ===== */
+        .slide-final-content {
+            position: relative;
+            z-index: 10;
+            width: 100%;
+            max-width: 1400px;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 40px 20px;
+            margin: 0 auto;
+        }
+
+        .slide-final-title {
+            font-family: 'IQOS-Bold', 'Arial Black', Arial, sans-serif;
+            font-size: 22px;
+            color: #FFFFFF;
+            text-transform: uppercase;
+            text-align: center;
+            letter-spacing: 2px;
+            text-shadow: 0 2px 8px rgba(0,0,0,0.15);
+            margin-bottom: 0;
+            line-height: 1.5;
+            position: absolute;
+            top: -150px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100%;
+            white-space: nowrap;
+        }
+
+        .final-button {
+            width: 200px;
+            height: 200px;
+            border: none;
+            background: transparent;
+            cursor: pointer;
+            padding: 0;
+            transition: transform 0.2s ease;
+            margin-top: 0;
+            position: relative;
+            z-index: 10;
+        }
+
+        .final-button:hover {
+            transform: scale(1.05);
+        }
+
+        .final-button:active {
+            transform: scale(0.92);
+            transition: transform 0.1s ease;
+        }
+
+        .final-button img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            pointer-events: none;
+        }
+
+        .btn-ring-wrap {
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-top: 0;
+        }
+
+        .btn-ring-back {
+            position: absolute;
+            border-radius: 50%;
+            background: #0cb1e8;
+            pointer-events: none;
+            width: 245px;
+            height: 245px;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        #afk-overlay { display: none; }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(6px) scale(0.98); }
+            to { opacity: 1; transform: translateY(0) scale(1); }
+        }
+
+        .slide.active {
+            animation: fadeIn 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .slider-knob {
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: translate(-50%, -50%) scale(1); }
+            50% { transform: translate(-50%, -50%) scale(1.03); }
+        }
+
+        /* ===== Tablete (max 1024px) ===== */
+        @media (max-width: 1024px) {
+            .slide-1-title, .slide-2-title, .quiz-title, .slide-3-text, .slide-final-title { font-size: 20px; }
+            .main-button, .final-button { width: 170px; height: 170px; }
+            .slider-knob { width: 160px; height: 160px; }
+            .slider-track { height: 140px; }
+            .lang-btn { width: 60px; height: 38px; }
+            .warning-text { font-size: 16px; }
+            .btn-ring-wrap { margin-top: 0; }
+            .btn-ring-back { width: 215px; height: 215px; }
+            .slide-1-title, .slide-2-title, .quiz-title { top: -45px; }
+            .slide-final-title { top: -60px; }
+        }
+
+        /* ===== Tablete mici / Landscape mobil (max 768px) ===== */
+        @media (max-width: 768px) {
+            .slide-1-title, .slide-2-title, .quiz-title { font-size: 17px; letter-spacing: 1.5px; }
+            .slide-3-text, .slide-final-title { font-size: 17px; line-height: 1.5; }
+            .main-button, .final-button { width: 140px; height: 140px; margin-top: 40px; }
+            .slider-wrapper { max-width: 100%; padding: 0 15px; }
+            .slider-knob { width: 130px; height: 130px; }
+            .slider-track { height: 115px; }
+            .slide-2-title, .quiz-title { transform: translateX(-50%); top: -38px; }
+            .warning-band.band-quiz { height: 80px; }
+            .warning-band.band-final { height: 120px; }
+            .warning-text { font-size: 13px; padding: 0 12px; }
+            .lang-buttons { top: 12px; right: 12px; gap: 8px; }
+            .lang-btn { width: 50px; height: 32px; }
+            .slide-3-content { padding: 20px; }
+            .slide-3-text .closing { margin-top: 28px; font-size: 21px; }
+            .slide-1-title { top: -50px; }
+            .slide-final-title { top: -50px; }
+        }
+
+        /* ===== Telefoane portrait (max 480px) ===== */
+        @media (max-width: 480px) {
+            .slide-1-title, .slide-2-title, .quiz-title { font-size: 14px; letter-spacing: 1px; }
+            .slide-3-text, .slide-final-title { font-size: 14px; }
+            .main-button, .final-button { width: 120px; height: 120px; margin-top: 30px; }
+            .btn-ring-back { width: 155px; height: 155px; }
+            .slider-knob { width: 110px; height: 110px; }
+            .slider-track { height: 95px; }
+            .slide-2-title, .quiz-title { transform: translateX(-50%); top: -30px; }
+            .warning-band.band-quiz { height: 68px; }
+            .warning-band.band-final { height: 100px; }
+            .warning-text { font-size: 10px; letter-spacing: 0.2px; padding: 0 8px; }
+            .lang-btn { width: 42px; height: 27px; }
+            .slide-3-text p { margin-bottom: 6px; }
+            .slide-3-text .closing { margin-top: 22px; font-size: 18px; }
+            .slide-bg-cercuri { width: 98%; }
+            .lang-buttons { top: 10px; right: 10px; gap: 6px; }
+            .slide-1-title { top: -40px; }
+            .slide-final-title { top: -60px; }
+        }
+
+        /* ===== Telefoane foarte mici (max 360px) ===== */
+        @media (max-width: 360px) {
+            .slide-1-title, .slide-2-title, .quiz-title { font-size: 11px; letter-spacing: 0.5px; }
+            .slide-3-text, .slide-final-title { font-size: 11px; }
+            .main-button, .final-button { width: 95px; height: 95px; }
+            .slider-knob { width: 90px; height: 90px; }
+            .slider-track { height: 75px; }
+            .warning-text { font-size: 8px; padding: 0 6px; }
+            .lang-btn { width: 36px; height: 22px; }
+            .btn-ring-back { width: 125px; height: 125px; }
+            .slide-2-title, .quiz-title { transform: translateX(-50%); top: -25px; }
+            .warning-band.band-quiz { height: 55px; }
+            .warning-band.band-final { height: 85px; }
+            .slide-1-title { top: -35px; }
+            .slide-final-title { top: -50px; }
+        }
+
+        /* ===== Landscape telefon (toate celelalte slideuri - NESCHIMBAT) ===== */
+        @media (max-height: 500px) and (orientation: landscape) {
+            .main-button, .final-button { width: 90px; height: 90px; margin-top: 5px; }
+            .slider-knob { width: 90px; height: 90px; }
+            .slider-track { height: 75px; }
+            .slide-2-title, .quiz-title { transform: translateX(-50%); top: -22px; font-size: 12px; }
+            .warning-band.band-quiz { height: 50px; }
+            .warning-band.band-final { height: 70px; }
+            .warning-text { font-size: 8px; }
+            .slide-1-title { font-size: 12px; margin-top: 0; top: -30px; }
+            .slide-final-title { top: -30px; font-size: 12px; }
+            .btn-ring-back { width: 115px; height: 115px; }
+            .lang-buttons { top: 8px; right: 8px; }
+            .lang-btn { width: 40px; height: 26px; }
+        }
+
+        /* ===== SLIDE 14: Landscape fix — titlu centrat, layout vertical compact ===== */
+        @media (max-height: 500px) and (orientation: landscape) {
+            #slide14 .slide-final-content {
+                justify-content: center;
+                padding: 8px 20px;
+            }
+
+            #slide14 .slide-1-center {
+                flex-direction: row;
+                align-items: center;
+                justify-content: center;
+                gap: 24px;
+                width: 100%;
+            }
+
+            #slide14 .slide-final-title {
+                position: static;
+                transform: none;
+                left: auto;
+                top: auto;
+                font-size: 10px;
+                line-height: 1.5;
+                letter-spacing: 0.5px;
+                white-space: normal;
+                text-align: center;
+                width: auto;
+                max-width: 55%;
+                flex-shrink: 1;
+            }
+
+            #slide14 .btn-ring-wrap {
+                flex-shrink: 0;
+                margin-top: 0;
+            }
+
+            #slide14 .final-button {
+                width: 80px;
+                height: 80px;
+                margin-top: 0;
+            }
+
+            #slide14 .btn-ring-back {
+                width: 105px;
+                height: 105px;
+            }
+        }
+    </style>
+<base target="_blank">
+</head>
+<body>
+
+    <!-- ========== SLIDE 1: Landing Page ========== -->
+    <div class="slide slide-1 active" id="slide1">
+        <img class="slide-bg-cercuri" src="cercuri.png" alt="">
+        <div class="content-area">
+            <div class="slide-1-content">
+                <div class="lang-buttons">
+                    <button class="lang-btn" onclick="switchLang('ro')">
+                        <img src="butonro.png" alt="RO">
+                    </button>
+                    <button class="lang-btn" onclick="switchLang('ru')">
+                        <img src="butonru.png" alt="RU">
+                    </button>
+                </div>
+                <div class="slide-1-center">
+                    <h1 class="slide-1-title" id="title_start">ÎMPĂRTĂȘEȘTE-ȚI EXPERIENȚA</h1>
+                    <div class="btn-ring-wrap">
+                        <div class="btn-ring-back"></div>
+                        <button class="main-button" onclick="goToSlide(2)">
+                            <img id="img_start" src="rob1.png" alt="APASĂ">
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="warning-band band-quiz">
+            <p class="warning-text" id="warn_start">
+                DESTINAT EXCLUSIV PENTRU AUTOEVALUAREA CUNOȘTINȚELOR PRIVIND LOCURILE DE UTILIZARE A PRODUSELOR CU NICOTINĂ.<br>
+                NU SE COLECTEAZĂ DATE PERSONALE.
+            </p>
+        </div>
+    </div>
+
+    <!-- ========== SLIDE 2: Age Verification ========== -->
+    <div class="slide slide-2" id="slide2">
+        <img class="slide-bg-cercuri" src="cercuri.png" alt="">
+        <div class="content-area">
+            <div class="slide-2-content">
+                <h2 class="slide-2-title" id="age_check">SUNTEȚI FUMĂTOR ADULT?</h2>
+                <div class="slider-wrapper" id="ageSliderWrapper">
+                    <img src="roelemente.png" alt="" class="slider-bg-img" id="ageSliderBg">
+                    <div class="slider-track" id="ageSliderTrack"></div>
+                    <div class="slider-knob" id="ageSliderKnob">
+                        <img src="rob2.png" alt="User" id="ageKnobImg">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="warning-band band-quiz">
+            <p class="warning-text" id="warn_quiz">
+                ACEST PRODUS NU ESTE LIPSIT DE RISCURI PENTRU SĂNĂTATE. CONȚINE NICOTINĂ CARE CREEAZĂ DEPENDENȚĂ.<br>
+                ESTE DESTINAT EXCLUSIV CONSUMATORILOR ADULȚI DE TUTUN SAU PRODUSE CU NICOTINĂ.
+            </p>
+        </div>
+    </div>
+
+    <!-- ========== SLIDE 3: Rejection Page ========== -->
+    <div class="slide slide-3" id="slide3">
+        <img class="slide-bg-cercuri" src="cercuri.png" alt="">
+        <div class="content-area">
+            <div class="slide-3-content">
+                <div class="slide-3-text" id="reject_text">
+                    <p>ACEASTĂ ACTIVITATE ESTE DESTINATĂ</p>
+                    <p>EXCLUSIV CONSUMATORILOR ADULȚI</p>
+                    <p>DE PRODUSE CU NICOTINĂ.</p>
+                    <p>DEOARECE NU VĂ ÎNCADRAȚI ÎN ACEASTĂ</p>
+                    <p>CATEGORIE, PARTICIPAREA NU ESTE DISPONIBILĂ.</p>
+                    <p class="closing">VĂ DORIM O SEARĂ PLĂCUTĂ!</p>
+                </div>
+            </div>
+        </div>
+        <div class="warning-band band-quiz">
+            <p class="warning-text" id="warn_reject">
+                ACEST PRODUS NU ESTE LIPSIT DE RISCURI PENTRU SĂNĂTATE. CONȚINE NICOTINĂ CARE CREEAZĂ DEPENDENȚĂ.<br>
+                ESTE DESTINAT EXCLUSIV CONSUMATORILOR ADULȚI DE TUTUN SAU PRODUSE CU NICOTINĂ.
+            </p>
+        </div>
+    </div>
+
+    <!-- ========== SLIDE 4: Quiz Question 1 ========== -->
+    <div class="slide slide-quiz" id="slide4">
+        <img class="slide-bg-cercuri" src="cercuri.png" alt="">
+        <div class="content-area">
+            <div class="slide-quiz-content">
+                <h2 class="quiz-title" id="q0">UTILIZAREA ȚIGĂRILOR ÎN TRANSPORT</h2>
+                <div class="slider-wrapper" id="quiz0SliderWrapper">
+                    <img src="roelemente.png" alt="" class="slider-bg-img">
+                    <div class="slider-track" id="quiz0SliderTrack"></div>
+                    <div class="slider-knob" id="quiz0SliderKnob">
+                        <img src="rob3.png" alt="Icon">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="warning-band band-quiz">
+            <p class="warning-text" id="warn_q0">ACEST PRODUS NU ESTE LIPSIT DE RISCURI PENTRU SĂNĂTATE. CONȚINE NICOTINĂ CARE CREEAZĂ DEPENDENȚĂ.<br>ESTE DESTINAT EXCLUSIV CONSUMATORILOR ADULȚI DE TUTUN SAU PRODUSE CU NICOTINĂ.</p>
+        </div>
+    </div>
+
+    <!-- ========== SLIDE 5: Quiz Question 2 ========== -->
+    <div class="slide slide-quiz" id="slide5">
+        <img class="slide-bg-cercuri" src="cercuri.png" alt="">
+        <div class="content-area">
+            <div class="slide-quiz-content">
+                <h2 class="quiz-title" id="q1">UTILIZAREA PLICULEȚELOR CU NICOTINĂ ÎN TRANSPORT</h2>
+                <div class="slider-wrapper" id="quiz1SliderWrapper">
+                    <img src="roelemente.png" alt="" class="slider-bg-img">
+                    <div class="slider-track" id="quiz1SliderTrack"></div>
+                    <div class="slider-knob" id="quiz1SliderKnob">
+                        <img src="rob3.png" alt="Icon">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="warning-band band-quiz">
+            <p class="warning-text" id="warn_q1">ACEST PRODUS NU ESTE LIPSIT DE RISCURI PENTRU SĂNĂTATE. CONȚINE NICOTINĂ CARE CREEAZĂ DEPENDENȚĂ.<br>ESTE DESTINAT EXCLUSIV CONSUMATORILOR ADULȚI DE TUTUN SAU PRODUSE CU NICOTINĂ.</p>
+        </div>
+    </div>
+
+    <!-- ========== SLIDE 6: Quiz Question 3 ========== -->
+    <div class="slide slide-quiz" id="slide6">
+        <img class="slide-bg-cercuri" src="cercuri.png" alt="">
+        <div class="content-area">
+            <div class="slide-quiz-content">
+                <h2 class="quiz-title" id="q2">UTILIZAREA ȚIGĂRILOR ÎN BAR</h2>
+                <div class="slider-wrapper" id="quiz2SliderWrapper">
+                    <img src="roelemente.png" alt="" class="slider-bg-img">
+                    <div class="slider-track" id="quiz2SliderTrack"></div>
+                    <div class="slider-knob" id="quiz2SliderKnob">
+                        <img src="rob4.png" alt="Icon">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="warning-band band-quiz">
+            <p class="warning-text" id="warn_q2">ACEST PRODUS NU ESTE LIPSIT DE RISCURI PENTRU SĂNĂTATE. CONȚINE NICOTINĂ CARE CREEAZĂ DEPENDENȚĂ.<br>ESTE DESTINAT EXCLUSIV CONSUMATORILOR ADULȚI DE TUTUN SAU PRODUSE CU NICOTINĂ.</p>
+        </div>
+    </div>
+
+    <!-- ========== SLIDE 7: Quiz Question 4 ========== -->
+    <div class="slide slide-quiz" id="slide7">
+        <img class="slide-bg-cercuri" src="cercuri.png" alt="">
+        <div class="content-area">
+            <div class="slide-quiz-content">
+                <h2 class="quiz-title" id="q3">UTILIZAREA PLICULEȚELOR CU NICOTINĂ ÎN BAR</h2>
+                <div class="slider-wrapper" id="quiz3SliderWrapper">
+                    <img src="roelemente.png" alt="" class="slider-bg-img">
+                    <div class="slider-track" id="quiz3SliderTrack"></div>
+                    <div class="slider-knob" id="quiz3SliderKnob">
+                        <img src="rob4.png" alt="Icon">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="warning-band band-quiz">
+            <p class="warning-text" id="warn_q3">ACEST PRODUS NU ESTE LIPSIT DE RISCURI PENTRU SĂNĂTATE. CONȚINE NICOTINĂ CARE CREEAZĂ DEPENDENȚĂ.<br>ESTE DESTINAT EXCLUSIV CONSUMATORILOR ADULȚI DE TUTUN SAU PRODUSE CU NICOTINĂ.</p>
+        </div>
+    </div>
+
+    <!-- ========== SLIDE 8: Quiz Question 5 ========== -->
+    <div class="slide slide-quiz" id="slide8">
+        <img class="slide-bg-cercuri" src="cercuri.png" alt="">
+        <div class="content-area">
+            <div class="slide-quiz-content">
+                <h2 class="quiz-title" id="q4">UTILIZAREA ȚIGĂRILOR ÎN CINEMA</h2>
+                <div class="slider-wrapper" id="quiz4SliderWrapper">
+                    <img src="roelemente.png" alt="" class="slider-bg-img">
+                    <div class="slider-track" id="quiz4SliderTrack"></div>
+                    <div class="slider-knob" id="quiz4SliderKnob">
+                        <img src="rob5.png" alt="Icon">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="warning-band band-quiz">
+            <p class="warning-text" id="warn_q4">ACEST PRODUS NU ESTE LIPSIT DE RISCURI PENTRU SĂNĂTATE. CONȚINE NICOTINĂ CARE CREEAZĂ DEPENDENȚĂ.<br>ESTE DESTINAT EXCLUSIV CONSUMATORILOR ADULȚI DE TUTUN SAU PRODUSE CU NICOTINĂ.</p>
+        </div>
+    </div>
+
+    <!-- ========== SLIDE 9: Quiz Question 6 ========== -->
+    <div class="slide slide-quiz" id="slide9">
+        <img class="slide-bg-cercuri" src="cercuri.png" alt="">
+        <div class="content-area">
+            <div class="slide-quiz-content">
+                <h2 class="quiz-title" id="q5">UTILIZAREA PLICULEȚELOR CU NICOTINĂ ÎN CINEMA</h2>
+                <div class="slider-wrapper" id="quiz5SliderWrapper">
+                    <img src="roelemente.png" alt="" class="slider-bg-img">
+                    <div class="slider-track" id="quiz5SliderTrack"></div>
+                    <div class="slider-knob" id="quiz5SliderKnob">
+                        <img src="rob5.png" alt="Icon">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="warning-band band-quiz">
+            <p class="warning-text" id="warn_q5">ACEST PRODUS NU ESTE LIPSIT DE RISCURI PENTRU SĂNĂTATE. CONȚINE NICOTINĂ CARE CREEAZĂ DEPENDENȚĂ.<br>ESTE DESTINAT EXCLUSIV CONSUMATORILOR ADULȚI DE TUTUN SAU PRODUSE CU NICOTINĂ.</p>
+        </div>
+    </div>
+
+    <!-- ========== SLIDE 10: Quiz Question 7 ========== -->
+    <div class="slide slide-quiz" id="slide10">
+        <img class="slide-bg-cercuri" src="cercuri.png" alt="">
+        <div class="content-area">
+            <div class="slide-quiz-content">
+                <h2 class="quiz-title" id="q6">UTILIZAREA ȚIGĂRILOR ÎN AVION</h2>
+                <div class="slider-wrapper" id="quiz6SliderWrapper">
+                    <img src="roelemente.png" alt="" class="slider-bg-img">
+                    <div class="slider-track" id="quiz6SliderTrack"></div>
+                    <div class="slider-knob" id="quiz6SliderKnob">
+                        <img src="rob6.png" alt="Icon">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="warning-band band-quiz">
+            <p class="warning-text" id="warn_q6">ACEST PRODUS NU ESTE LIPSIT DE RISCURI PENTRU SĂNĂTATE. CONȚINE NICOTINĂ CARE CREEAZĂ DEPENDENȚĂ.<br>ESTE DESTINAT EXCLUSIV CONSUMATORILOR ADULȚI DE TUTUN SAU PRODUSE CU NICOTINĂ.</p>
+        </div>
+    </div>
+
+    <!-- ========== SLIDE 11: Quiz Question 8 ========== -->
+    <div class="slide slide-quiz" id="slide11">
+        <img class="slide-bg-cercuri" src="cercuri.png" alt="">
+        <div class="content-area">
+            <div class="slide-quiz-content">
+                <h2 class="quiz-title" id="q7">UTILIZAREA PLICULEȚELOR CU NICOTINĂ ÎN AVION</h2>
+                <div class="slider-wrapper" id="quiz7SliderWrapper">
+                    <img src="roelemente.png" alt="" class="slider-bg-img">
+                    <div class="slider-track" id="quiz7SliderTrack"></div>
+                    <div class="slider-knob" id="quiz7SliderKnob">
+                        <img src="rob6.png" alt="Icon">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="warning-band band-quiz">
+            <p class="warning-text" id="warn_q7">ACEST PRODUS NU ESTE LIPSIT DE RISCURI PENTRU SĂNĂTATE. CONȚINE NICOTINĂ CARE CREEAZĂ DEPENDENȚĂ.<br>ESTE DESTINAT EXCLUSIV CONSUMATORILOR ADULȚI DE TUTUN SAU PRODUSE CU NICOTINĂ.</p>
+        </div>
+    </div>
+
+    <!-- ========== SLIDE 12: Quiz Question 9 ========== -->
+    <div class="slide slide-quiz" id="slide12">
+        <img class="slide-bg-cercuri" src="cercuri.png" alt="">
+        <div class="content-area">
+            <div class="slide-quiz-content">
+                <h2 class="quiz-title" id="q8">UTILIZAREA ȚIGĂRILOR ÎN AFARA CASEI</h2>
+                <div class="slider-wrapper" id="quiz8SliderWrapper">
+                    <img src="roelemente.png" alt="" class="slider-bg-img">
+                    <div class="slider-track" id="quiz8SliderTrack"></div>
+                    <div class="slider-knob" id="quiz8SliderKnob">
+                        <img src="rob7.png" alt="Icon">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="warning-band band-quiz">
+            <p class="warning-text" id="warn_q8">ACEST PRODUS NU ESTE LIPSIT DE RISCURI PENTRU SĂNĂTATE. CONȚINE NICOTINĂ CARE CREEAZĂ DEPENDENȚĂ.<br>ESTE DESTINAT EXCLUSIV CONSUMATORILOR ADULȚI DE TUTUN SAU PRODUSE CU NICOTINĂ.</p>
+        </div>
+    </div>
+
+    <!-- ========== SLIDE 13: Quiz Question 10 ========== -->
+    <div class="slide slide-quiz" id="slide13">
+        <img class="slide-bg-cercuri" src="cercuri.png" alt="">
+        <div class="content-area">
+            <div class="slide-quiz-content">
+                <h2 class="quiz-title" id="q9">UTILIZAREA PLICULEȚELOR CU NICOTINĂ ÎN AFARA CASEI</h2>
+                <div class="slider-wrapper" id="quiz9SliderWrapper">
+                    <img src="roelemente.png" alt="" class="slider-bg-img">
+                    <div class="slider-track" id="quiz9SliderTrack"></div>
+                    <div class="slider-knob" id="quiz9SliderKnob">
+                        <img src="rob7.png" alt="Icon">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="warning-band band-quiz">
+            <p class="warning-text" id="warn_q9">ACEST PRODUS NU ESTE LIPSIT DE RISCURI PENTRU SĂNĂTATE. CONȚINE NICOTINĂ CARE CREEAZĂ DEPENDENȚĂ.<br>ESTE DESTINAT EXCLUSIV CONSUMATORILOR ADULȚI DE TUTUN SAU PRODUSE CU NICOTINĂ.</p>
+        </div>
+    </div>
+
+    <!-- ========== SLIDE 14: Thank You Page ========== -->
+    <div class="slide slide-final" id="slide14">
+        <img class="slide-bg-cercuri" src="cercuri.png" alt="">
+        <div class="content-area">
+            <div class="slide-final-content">
+                <div class="slide-1-center">
+                    <h2 class="slide-final-title" id="final_title">
+                        VĂ MULȚUMIM PENTRU RĂSPUNSURI!<br>
+                        AȚI IDENTIFICAT <span id="scoreCount">5</span> SITUAȚII ÎN CARE PLICULEȚELE CU NICOTINĂ<br>
+                        NU AFECTEAZĂ PERSOANELE DIN JUR
+                    </h2>
+                    <div class="btn-ring-wrap">
+                        <div class="btn-ring-back"></div>
+                        <button class="final-button" onclick="goToSlide(1)">
+                            <img id="img_final" src="rob8.png" alt="VĂ MULȚUMIM PENTRU RĂSPUNSURI!">
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="warning-band band-final">
+            <p class="warning-text" id="warn_final">
+                UTILIZAREA PRODUSULUI POATE FI LIMITATĂ SAU INTERZISĂ ÎN ANUMITE LOCURI ÎN CONFORMITATE CU REGULILE STABILITE DE OPERATORUL SPAȚIULUI, TRANSPORTATOR SAU ANGAJATOR.<br><br>
+                ACEST PRODUS NU ESTE LIPSIT DE RISCURI PENTRU SĂNĂTATE. CONȚINE NICOTINĂ CARE CREEAZĂ DEPENDENȚĂ.<br>
+                ESTE DESTINAT EXCLUSIV CONSUMATORILOR ADULȚI DE TUTUN SAU PRODUSE CU NICOTINĂ.
+            </p>
+        </div>
+    </div>
+
+    <script>
+        const translations = {
+            ru: {
+                title_start: "ПОДЕЛИСЬ СВОИМ ОПЫТОМ",
+                age_check: "ВЫ ЯВЛЯЕТЕСЬ СОВЕРШЕННОЛЕТНИМ КУРИЛЬЩИКОМ?",
+                warn_start: "ПРЕДНАЗНАЧЕНО ТОЛЬКО ДЛЯ САМОПРОВЕРКИ ЗНАНИЙ О МЕСТАХ ИСПОЛЬЗОВАНИЯ НИКОТИНОВЫХ ПРОДУКТОВ.<br>ПЕРСОНАЛЬНЫЕ ДАННЫЕ НЕ СОБИРАЮТСЯ.",
+                warn_quiz: "ЭТОТ ПРОДУКТ НЕ ИСКЛЮЧАЕТ РИСКОВ ДЛЯ ЗДОРОВЬЯ. ОН СОДЕРЖИТ НИКОТИН, КОТОРЫЙ ВЫЗЫВАЕТ ЗАВИСИМОСТЬ.<br>ПРЕДНАЗНАЧЕНО ТОЛЬКО ДЛЯ СОВЕРШЕННОЛЕТНИХ ПОТРЕБИТЕЛЕЙ НИКОТИНОСОДЕРЖАЩИХ ПРОДУКТОВ.",
+                reject_text: `<p>ЭТА АКТИВНОСТЬ ПРЕДНАЗНАЧЕНА</p><p>ИСКЛЮЧИТЕЛЬНО ДЛЯ СОВЕРШЕННОЛЕТНИХ</p><p>ПОТРЕБИТЕЛЕЙ НИКОТИНОВЫХ ИЗДЕЛИЙ.</p><p>ПОСКОЛЬКУ ВЫ НЕ ОТНОСИТЕСЬ К ДАННОЙ</p><p>АУДИТОРИИ, УЧАСТИЕ НЕДОСТУПНО.</p><p class="closing">ХОРОШЕГО ВЕЧЕРА!</p>`,
+                warn_final: "ИСПОЛЬЗОВАНИЕ ПРОДУКТА МОЖЕТ БЫТЬ ОГРАНИЧЕНО ИЛИ ЗАПРЕЩЕНО В ОПРЕДЕЛЁННЫХ МЕСТАХ В СООТВЕТСТВИИ<br>С ПРАВИЛАМИ, УСТАНОВЛЕННЫМИ ОПЕРАТОРОМ СООТВЕТСТВУЮЩИХ ПОМЕЩЕНИЙ, ПЕРЕВОЗЧИКОМ ИЛИ РАБОТОДАТЕЛЕМ.<br><br>ЭТОТ ПРОДУКТ НЕ ИСКЛЮЧАЕТ РИСКОВ ДЛЯ ЗДОРОВЬЯ. ОН СОДЕРЖИТ НИКОТИН, КОТОРЫЙ ВЫЗЫВАЕТ ЗАВИСИМОСТЬ.<br>ПРЕДНАЗНАЧЕНО ТОЛЬКО ДЛЯ СОВЕРШЕННОЛЕТНИХ ПОТРЕБИТЕЛЕЙ НИКОТИНОСОДЕРЖАЩИХ ПРОДУКТОВ.",
+                final_title: "ВЫ ОТМЕТИЛИ {score} СИТУАЦИЙ, В КОТОРЫХ НИКОТИНОВЫЕ ПАУЧИ<br>ОКАЗЫВАЮТ ВЛИЯНИЯ НА ОКРУЖАЮЩИХ",
+                questions: [
+                    "ИСПОЛЬЗОВАТЬ СИГАРЕТЫ В ТРАНСПОРТЕ",
+                    "ИСПОЛЬЗОВАТЬ НИКОТИНОВЫЕ ПАУЧИ В ТРАНСПОРТЕ",
+                    "ИСПОЛЬЗОВАТЬ СИГАРЕТЫ В БАРЕ",
+                    "ИСПОЛЬЗОВАТЬ НИКОТИНОВЫЕ ПАУЧИ В БАРЕ",
+                    "ИСПОЛЬЗОВАТЬ СИГАРЕТЫ В КИНОТЕАТРЕ",
+                    "ИСПОЛЬЗОВАТЬ НИКОТИНОВЫЕ ПАУЧИ В КИНОТЕАТРЕ",
+                    "ИСПОЛЬЗОВАТЬ СИГАРЕТЫ В САМОЛЁТЕ",
+                    "ИСПОЛЬЗОВАТЬ НИКОТИНОВЫЕ ПАУЧИ В САМОЛЁТЕ",
+                    "ИСПОЛЬЗОВАТЬ СИГАРЕТЫ СНАРУЖИ ДОМА",
+                    "ИСПОЛЬЗОВАТЬ НИКОТИНОВЫЕ ПАУЧИ СНАРУЖИ ДОМА",
+                ]
+            },
+            ro: {
+                title_start: "ÎMPĂRTĂȘEȘTE-ȚI EXPERIENȚA",
+                age_check: "SUNTEȚI FUMĂTOR ADULT?",
+                warn_start: "DESTINAT EXCLUSIV PENTRU AUTOEVALUAREA CUNOȘTINȚELOR PRIVIND LOCURILE DE UTILIZARE A PRODUSELOR CU NICOTINĂ.<br>NU SE COLECTEAZĂ DATE PERSONALE.",
+                warn_quiz: "ACEST PRODUS NU ESTE LIPSIT DE RISCURI PENTRU SĂNĂTATE. CONȚINE NICOTINĂ CARE CREEAZĂ DEPENDENȚĂ.<br>ESTE DESTINAT EXCLUSIV CONSUMATORILOR ADULȚI DE TUTUN SAU PRODUSE CU NICOTINĂ.",
+                reject_text: `<p>ACEASTĂ ACTIVITATE ESTE DESTINATĂ</p><p>EXCLUSIV CONSUMATORILOR ADULȚI</p><p>DE PRODUSE CU NICOTINĂ.</p><p>DEOARECE NU VĂ ÎNCADRAȚI ÎN ACEASTĂ</p><p>CATEGORIE, PARTICIPAREA NU ESTE DISPONIBILĂ.</p><p class="closing">VĂ DORIM O SEARĂ PLĂCUTĂ!</p>`,
+                warn_final: "UTILIZAREA PRODUSULUI POATE FI LIMITATĂ SAU INTERZISĂ ÎN ANUMITE LOCURI ÎN CONFORMITATE CU REGULILE STABILITE DE OPERATORUL SPAȚIULUI, TRANSPORTATOR SAU ANGAJATOR.<br><br>ACEST PRODUS NU ESTE LIPSIT DE RISCURI PENTRU SĂNĂTATE. CONȚINE NICOTINĂ CARE CREEAZĂ DEPENDENȚĂ.<br>ESTE DESTINAT EXCLUSIV CONSUMATORILOR ADULȚI DE TUTUN SAU PRODUSE CU NICOTINĂ.",
+                final_title: "VĂ MULȚUMIM PENTRU RĂSPUNSURI!<br>AȚI IDENTIFICAT {score} SITUAȚII ÎN CARE PLICULEȚELE CU NICOTINĂ<br>NU AFECTEAZĂ PERSOANELE DIN JUR",
+                questions: [
+                    "UTILIZAREA ȚIGĂRILOR ÎN TRANSPORT",
+                    "UTILIZAREA PLICULEȚELOR CU NICOTINĂ ÎN TRANSPORT",
+                    "UTILIZAREA ȚIGĂRILOR ÎN BAR",
+                    "UTILIZAREA PLICULEȚELOR CU NICOTINĂ ÎN BAR",
+                    "UTILIZAREA ȚIGĂRILOR ÎN CINEMA",
+                    "UTILIZAREA PLICULEȚELOR CU NICOTINĂ ÎN CINEMA",
+                    "UTILIZAREA ȚIGĂRILOR ÎN AVION",
+                    "UTILIZAREA PLICULEȚELOR CU NICOTINĂ ÎN AVION",
+                    "UTILIZAREA ȚIGĂRILOR ÎN AFARA CASEI",
+                    "UTILIZAREA PLICULEȚELOR CU NICOTINĂ ÎN AFARA CASEI",
+                ]
+            }
+        };
+
+        const imageAssets = {
+            img_start:    ['b1.png',      'rob1.png'],
+            ageKnobImg:   ['b2.png',      'rob2.png'],
+            img_final:    ['b8.png',      'rob8.png'],
+            ageSliderBg:  ['elemente.png','roelemente.png'],
+            warn_band_quiz:  ['banda 1.png', 'robanda 1.png'],
+            warn_band_final: ['banda 2.png', 'robanda 2.png'],
+        };
+
+        const quizIcons = [
+            ['b3.png','rob3.png'],['b3.png','rob3.png'],
+            ['b4.png','rob4.png'],['b4.png','rob4.png'],
+            ['b5.png','rob5.png'],['b5.png','rob5.png'],
+            ['b6.png','rob6.png'],['b6.png','rob6.png'],
+            ['b7.png','rob7.png'],['b7.png','rob7.png'],
+        ];
+
+        let currentLang = 'ro';
+        let autoReturnTimer = null;
+        let afkTimer = null;
+        const AFK_TIMEOUT = 20000;
+
+        function resetAfkTimer() {
+            if (afkTimer) clearTimeout(afkTimer);
+            const activeSlide = document.querySelector('.slide.active');
+            if (!activeSlide || activeSlide.id === 'slide1') return;
+            afkTimer = setTimeout(() => goToSlide(1), AFK_TIMEOUT);
+        }
+
+        ['mousemove','mousedown','touchstart','keydown','scroll'].forEach(evt => {
+            document.addEventListener(evt, resetAfkTimer, { passive: true });
+        });
+
+        function goToSlide(slideNum) {
+            if (autoReturnTimer) { clearTimeout(autoReturnTimer); autoReturnTimer = null; }
+            if (afkTimer) { clearTimeout(afkTimer); afkTimer = null; }
+            document.querySelectorAll('.slide').forEach(slide => slide.classList.remove('active'));
+            const targetSlide = document.getElementById('slide' + slideNum);
+            if (targetSlide) targetSlide.classList.add('active');
+            if (slideNum === 2) resetSlider('age');
+            if (slideNum >= 4 && slideNum <= 13) resetSlider('quiz' + (slideNum - 4));
+            if (slideNum === 3) autoReturnTimer = setTimeout(() => goToSlide(1), 8000);
+            if (slideNum === 14) autoReturnTimer = setTimeout(() => goToSlide(1), 10000);
+            if (slideNum !== 1) resetAfkTimer();
+        }
+
+        function switchLang(lang) {
+            currentLang = lang;
+            const t = translations[lang];
+            const idx = lang === 'ro' ? 1 : 0;
+
+            document.getElementById('title_start').textContent = t.title_start;
+            document.getElementById('age_check').textContent = t.age_check;
+            document.getElementById('warn_start').innerHTML = t.warn_start;
+            document.getElementById('warn_quiz').innerHTML = t.warn_quiz;
+            document.getElementById('warn_reject').innerHTML = t.warn_quiz;
+            document.getElementById('reject_text').innerHTML = t.reject_text;
+            document.getElementById('warn_final').innerHTML = t.warn_final;
+
+            const scoreEl = document.getElementById('scoreCount');
+            if (scoreEl) document.getElementById('final_title').innerHTML = t.final_title.replace('{score}', scoreEl.textContent);
+
+            for (let i = 0; i < 10; i++) {
+                const qEl = document.getElementById('q' + i);
+                if (qEl && t.questions[i]) qEl.textContent = t.questions[i];
+                const wEl = document.getElementById('warn_q' + i);
+                if (wEl) wEl.innerHTML = t.warn_quiz;
+            }
+
+            for (const [id, paths] of Object.entries(imageAssets)) {
+                const el = document.getElementById(id);
+                if (el) {
+                    if (el.tagName === 'IMG') el.src = paths[idx];
+                }
+            }
+
+            document.querySelectorAll('.warning-band.band-quiz').forEach(band => {
+                band.style.backgroundImage = "url('" + imageAssets.warn_band_quiz[idx] + "')";
+            });
+            document.querySelectorAll('.warning-band.band-final').forEach(band => {
+                band.style.backgroundImage = "url('" + imageAssets.warn_band_final[idx] + "')";
+            });
+
+            for (let i = 0; i < 10; i++) {
+                const wrapper = document.getElementById('quiz' + i + 'SliderWrapper');
+                if (wrapper) {
+                    const bgImg = wrapper.querySelector('.slider-bg-img');
+                    if (bgImg) bgImg.src = imageAssets.ageSliderBg[idx];
+                    const knob = document.getElementById('quiz' + i + 'SliderKnob');
+                    if (knob) {
+                        const knobImg = knob.querySelector('img');
+                        if (knobImg) knobImg.src = quizIcons[i][idx];
+                    }
+                }
+            }
+        }
+
+        function initSlider(type) {
+            const wrapper = document.getElementById(type + 'SliderWrapper');
+            const knob = document.getElementById(type + 'SliderKnob');
+            const track = document.getElementById(type + 'SliderTrack');
+            if (!wrapper || !knob || !track) return;
+
+            let isDragging = false;
+            let startX = 0;
+            let currentX = 0;
+            let knobLeft = 50;
+
+            function getTrackBounds() {
+                const trackRect = track.getBoundingClientRect();
+                const wrapperRect = wrapper.getBoundingClientRect();
+                return {
+                    left: ((trackRect.left - wrapperRect.left) / wrapperRect.width) * 100,
+                    right: ((trackRect.right - wrapperRect.left) / wrapperRect.width) * 100,
+                    width: trackRect.width
+                };
+            }
+
+            function handleStart(e) {
+                isDragging = true;
+                knob.classList.remove('snapping');
+                const clientX = e.type.includes('touch') ? e.touches[0].clientX : e.clientX;
+                startX = clientX;
+                const knobRect = knob.getBoundingClientRect();
+                const wrapperRect = wrapper.getBoundingClientRect();
+                currentX = ((knobRect.left + knobRect.width/2 - wrapperRect.left) / wrapperRect.width) * 100;
+            }
+
+            function handleMove(e) {
+                if (!isDragging) return;
+                e.preventDefault();
+                const clientX = e.type.includes('touch') ? e.touches[0].clientX : e.clientX;
+                const deltaX = clientX - startX;
+                const wrapperRect = wrapper.getBoundingClientRect();
+                const deltaPercent = (deltaX / wrapperRect.width) * 100;
+                let newLeft = currentX + deltaPercent;
+                const bounds = getTrackBounds();
+                newLeft = Math.max(bounds.left + 10, Math.min(bounds.right - 10, newLeft));
+                knobLeft = newLeft;
+                knob.style.left = newLeft + '%';
+            }
+
+            function handleEnd() {
+                if (!isDragging) return;
+                isDragging = false;
+                knob.classList.add('snapping');
+                const bounds = getTrackBounds();
+                const trackCenter = bounds.left + (bounds.right - bounds.left) / 2;
+                if (knobLeft < trackCenter - 10) {
+                    knobLeft = bounds.left + 15;
+                    knob.style.left = knobLeft + '%';
+                    setTimeout(() => handleSliderAnswer(type, true), 400);
+                } else if (knobLeft > trackCenter + 10) {
+                    knobLeft = bounds.right - 15;
+                    knob.style.left = knobLeft + '%';
+                    setTimeout(() => handleSliderAnswer(type, false), 400);
+                } else {
+                    knobLeft = 50;
+                    knob.style.left = '50%';
+                }
+            }
+
+            knob.addEventListener('mousedown', handleStart);
+            document.addEventListener('mousemove', handleMove);
+            document.addEventListener('mouseup', handleEnd);
+            knob.addEventListener('touchstart', handleStart, { passive: true });
+            document.addEventListener('touchmove', handleMove, { passive: false });
+            document.addEventListener('touchend', handleEnd);
+
+            knob.addEventListener('click', function(e) {
+                if (isDragging) return;
+                e.stopPropagation();
+                knob.classList.add('snapping');
+                const bounds = getTrackBounds();
+                knobLeft = bounds.left + 15;
+                knob.style.left = knobLeft + '%';
+                setTimeout(() => handleSliderAnswer(type, true), 400);
+            });
+
+            track.addEventListener('click', function(e) {
+                if (isDragging) return;
+                const rect = track.getBoundingClientRect();
+                const clickX = e.clientX - rect.left;
+                const percent = (clickX / rect.width) * 100;
+                const bounds = getTrackBounds();
+                knob.classList.add('snapping');
+                if (percent < 50) {
+                    knobLeft = bounds.left + 15;
+                    knob.style.left = knobLeft + '%';
+                    setTimeout(() => handleSliderAnswer(type, true), 400);
+                } else {
+                    knobLeft = bounds.right - 15;
+                    knob.style.left = knobLeft + '%';
+                    setTimeout(() => handleSliderAnswer(type, false), 400);
+                }
+            });
+        }
+
+        function handleSliderAnswer(type, answer) {
+            if (type === 'age') {
+                goToSlide(answer ? 4 : 3);
+            } else if (type.startsWith('quiz')) {
+                const qIndex = parseInt(type.replace('quiz', ''));
+                const nextSlide = qIndex + 5;
+                if (nextSlide <= 13) goToSlide(nextSlide);
+                else showFinalPage();
+            }
+        }
+
+        function resetSlider(type) {
+            const knob = document.getElementById(type + 'SliderKnob');
+            if (knob) { knob.classList.remove('snapping'); knob.style.left = '50%'; }
+        }
+
+        function showFinalPage() {
+            try {
+                const score = 5;
+                const scoreEl = document.getElementById('scoreCount');
+                if (scoreEl) scoreEl.textContent = score;
+                const t = translations[currentLang] || translations['ro'];
+                const finalTitle = document.getElementById('final_title');
+                if (finalTitle && t && t.final_title) finalTitle.innerHTML = t.final_title.replace('{score}', score);
+            } catch (e) { console.error('Error in showFinalPage:', e); }
+            goToSlide(14);
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            initSlider('age');
+            for (let i = 0; i < 10; i++) initSlider('quiz' + i);
+            document.querySelectorAll('.slide').forEach(s => s.classList.remove('active'));
+            document.getElementById('slide1').classList.add('active');
+            switchLang('ro');
+        });
+    </script>
+</body>
+</html>
