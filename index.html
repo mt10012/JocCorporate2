@@ -53,7 +53,7 @@
 
         .slide-bg-cercuri {
             position: absolute;
-            top: calc(50% - 50px);
+            top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
             width: 92%;
@@ -162,6 +162,7 @@
             justify-content: center;
             position: relative;
             width: 100%;
+            padding-top: 60px;
         }
 
         .slide-1-title {
@@ -172,13 +173,15 @@
             letter-spacing: 3px;
             text-align: center;
             text-shadow: 0 2px 8px rgba(0,0,0,0.15);
-            margin-bottom: 0;
+            margin: 0;
             position: absolute;
-            top: -150px;
+            top: 20%;
             left: 50%;
             transform: translateX(-50%);
             width: 100%;
-            white-space: nowrap;
+            white-space: normal;
+            padding: 0 20px;
+            z-index: 20;
         }
 
         .main-button {
@@ -208,6 +211,9 @@
             justify-content: center;
             user-select: none;
             -webkit-user-select: none;
+            margin-top: auto;
+            margin-bottom: auto;
+            flex-shrink: 0;
         }
 
         .slider-bg-img {
@@ -254,9 +260,10 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: center;
-            padding: 40px 20px;
+            justify-content: flex-start;
+            padding: 0 20px;
             margin: 0 auto;
+            gap: 0;
         }
 
         .slide-2-title {
@@ -267,14 +274,15 @@
             text-align: center;
             letter-spacing: 3px;
             text-shadow: 0 2px 8px rgba(0,0,0,0.15);
-            margin-bottom: 0;
+            margin: 0;
             position: absolute;
-            top: 5px;
+            top: 18%;
             left: 50%;
             transform: translateX(-50%);
             width: 100%;
-            white-space: nowrap;
-            padding: 120px 20px 40px;
+            white-space: normal;
+            padding: 0 20px;
+            z-index: 20;
         }
 
         /* ===== SLIDE 3 ===== */
@@ -302,6 +310,8 @@
             width: 100%;
             letter-spacing: 1px;
             text-shadow: 0 2px 8px rgba(0,0,0,0.15);
+            position: relative;
+            z-index: 10;
         }
 
         .slide-3-text p { margin-bottom: 10px; }
@@ -317,9 +327,10 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: center;
-            padding: 40px 20px;
+            justify-content: flex-start;
+            padding: 0 20px;
             margin: 0 auto;
+            gap: 0;
         }
 
         .quiz-title {
@@ -330,15 +341,16 @@
             text-align: center;
             letter-spacing: 2px;
             text-shadow: 0 2px 8px rgba(0,0,0,0.15);
-            margin-bottom: 0;
+            margin: 0;
             position: absolute;
-            top: 5px;
+            top: 18%;
             left: 50%;
             transform: translateX(-50%);
             width: 100%;
-            min-height: auto;
             display: block;
-            padding: 120px 20px 40px;
+            padding: 0 20px;
+            white-space: normal;
+            z-index: 20;
         }
 
         /* ===== SLIDE FINAL ===== */
@@ -347,12 +359,24 @@
             z-index: 10;
             width: 100%;
             max-width: 1400px;
+            height: 100%;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
             padding: 40px 20px;
             margin: 0 auto;
+        }
+
+        #slide14 .content-area {
+            align-items: center;
+            justify-content: center;
+        }
+
+        #slide14 .slide-final-content {
+            align-items: center;
+            justify-content: center;
+            height: 100%;
         }
 
         #slide14 .slide-1-center {
@@ -362,7 +386,7 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            gap: 30px;
+            padding-top: 80px;
         }
 
         .slide-final-title {
@@ -373,12 +397,16 @@
             text-align: center;
             letter-spacing: 2px;
             text-shadow: 0 2px 8px rgba(0,0,0,0.15);
-            margin-bottom: 0;
+            margin: 0;
             line-height: 1.5;
-            position: static;
-            transform: none;
+            position: absolute;
+            top: 12%;
+            left: 50%;
+            transform: translateX(-50%);
             width: 100%;
             white-space: normal;
+            padding: 0 20px;
+            z-index: 20;
         }
 
         .final-button {
@@ -403,7 +431,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            margin-top: 0;
+            flex-shrink: 0;
         }
 
         .btn-ring-back {
@@ -435,34 +463,35 @@
         }
 
         /* ========================================
-           RESPONSIVE — DOAR ADĂUGIRI PE DEASUPRA
+           RESPONSIVE
         ======================================== */
 
         /* Tablete mari (max 1024px) */
         @media (max-width: 1024px) {
-            .slide-1-title, .slide-2-title, .quiz-title, .slide-3-text, .slide-final-title { font-size: 20px; }
+            .slide-1-title, .slide-3-text, .slide-final-title { font-size: 20px; top: 11%; }
+            .slide-2-title, .quiz-title { font-size: 20px; top: 16%; }
             .main-button, .final-button { width: 170px; height: 170px; }
-            .slider-knob { width: 160px; height: 160px; }
-            .slider-track { height: 140px; }
+            .slider-knob { width: 150px; height: 150px; }
+            .slider-track { height: 130px; }
+            .slider-wrapper { max-width: 85%; }
             .lang-btn { width: 60px; height: 38px; }
             .warning-text { font-size: 16px; }
             .btn-ring-back { width: 215px; height: 215px; }
-            .slide-1-title { top: -130px; }
-            .slide-2-title, .quiz-title { top: 5px; }
-            .slide-final-title { white-space: normal; }
+            
+            #slide14 
+            .slide-2-content, .slide-quiz-content { gap: 0; }
         }
 
         /* Tablete mici / Landscape mobil (max 768px) */
         @media (max-width: 768px) {
-            .slide-1-title, .slide-2-title, .quiz-title { font-size: 17px; letter-spacing: 1.5px; white-space: normal; text-align: center; }
+            .slide-1-title { font-size: 17px; letter-spacing: 1.5px; white-space: normal; text-align: center; top: 10%; }
+            .slide-2-title, .quiz-title { font-size: 17px; letter-spacing: 1.5px; white-space: normal; text-align: center; top: 16%; }
             .slide-3-text { font-size: 17px; line-height: 1.5; }
-            .slide-final-title { font-size: 17px; line-height: 1.5; white-space: normal; }
+            .slide-final-title { font-size: 17px; line-height: 1.5; white-space: normal; top: 10%; }
             .main-button, .final-button { width: 140px; height: 140px; }
-            .slider-wrapper { max-width: 100%; padding: 0 15px; }
-            .slider-knob { width: 130px; height: 130px; }
-            .slider-track { height: 115px; }
-            .slide-2-title { top: 5px; padding: 80px 20px 20px; }
-            .quiz-title { top: 5px; padding: 80px 20px 20px; }
+            .slider-wrapper { max-width: 85%; padding: 0 10px; }
+            .slider-knob { width: 120px; height: 120px; }
+            .slider-track { height: 105px; }
             .warning-band.band-quiz { height: 80px; }
             .warning-band.band-final { height: 120px; }
             .warning-text { font-size: 13px; padding: 0 12px; }
@@ -470,22 +499,23 @@
             .lang-btn { width: 50px; height: 32px; }
             .slide-3-content { padding: 20px; }
             .slide-3-text .closing { margin-top: 28px; font-size: 21px; }
-            .slide-1-title { top: -110px; }
             .btn-ring-back { width: 185px; height: 185px; }
-            #slide14 .slide-1-center { gap: 20px; }
+            
+            #slide14 
+            .slide-2-content, .slide-quiz-content { gap: 0; }
         }
 
         /* Telefoane portrait (max 480px) */
         @media (max-width: 480px) {
-            .slide-1-title, .slide-2-title, .quiz-title { font-size: 14px; letter-spacing: 1px; white-space: normal; }
+            .slide-1-title { font-size: 14px; letter-spacing: 1px; white-space: normal; top: 9%; }
+            .slide-2-title, .quiz-title { font-size: 14px; letter-spacing: 1px; white-space: normal; top: 16%; }
             .slide-3-text { font-size: 14px; }
-            .slide-final-title { font-size: 14px; white-space: normal; }
+            .slide-final-title { font-size: 14px; white-space: normal; top: 9%; }
             .main-button, .final-button { width: 120px; height: 120px; }
             .btn-ring-back { width: 155px; height: 155px; }
-            .slider-knob { width: 110px; height: 110px; }
-            .slider-track { height: 95px; }
-            .slide-2-title { top: 5px; padding: 60px 16px 16px; }
-            .quiz-title { top: 5px; padding: 60px 16px 16px; }
+            .slider-wrapper { max-width: 80%; padding: 0 5px; }
+            .slider-knob { width: 95px; height: 95px; }
+            .slider-track { height: 85px; }
             .warning-band.band-quiz { height: 68px; }
             .warning-band.band-final { height: 100px; }
             .warning-text { font-size: 10px; letter-spacing: 0.2px; padding: 0 8px; }
@@ -494,84 +524,59 @@
             .slide-3-text .closing { margin-top: 22px; font-size: 18px; }
             .slide-bg-cercuri { width: 98%; }
             .lang-buttons { top: 10px; right: 10px; gap: 6px; }
-            .slide-1-title { top: -90px; }
-            #slide14 .slide-1-center { gap: 16px; }
+            
+            .slide-2-content, .slide-quiz-content { gap: 0; }
+            .slide-1-content { padding: 0 20px; }
+            .slide-2-content { padding: 0 16px; }
+            .slide-quiz-content { padding: 0 16px; }
         }
 
         /* Telefoane foarte mici (max 360px) */
         @media (max-width: 360px) {
-            .slide-1-title, .slide-2-title, .quiz-title { font-size: 11px; letter-spacing: 0.5px; }
-            .slide-3-text, .slide-final-title { font-size: 11px; }
+            .slide-1-title { font-size: 11px; letter-spacing: 0.5px; top: 8%; }
+            .slide-2-title, .quiz-title { font-size: 11px; letter-spacing: 0.5px; top: 16%; }
+            .slide-3-text { font-size: 11px; }
+            .slide-final-title { font-size: 11px; top: 8%; }
             .main-button, .final-button { width: 95px; height: 95px; }
-            .slider-knob { width: 90px; height: 90px; }
-            .slider-track { height: 75px; }
+            .slider-wrapper { max-width: 78%; }
+            .slider-knob { width: 80px; height: 80px; }
+            .slider-track { height: 70px; }
             .warning-text { font-size: 8px; padding: 0 6px; }
             .lang-btn { width: 36px; height: 22px; }
             .btn-ring-back { width: 125px; height: 125px; }
-            .slide-2-title { padding: 50px 12px 12px; }
-            .quiz-title { padding: 50px 12px 12px; }
             .warning-band.band-quiz { height: 55px; }
             .warning-band.band-final { height: 85px; }
-            .slide-1-title { top: -75px; }
+            
+            .slide-2-content, .slide-quiz-content { gap: 0; }
         }
 
         /* Landscape telefon — ecran scund */
         @media (max-height: 500px) and (orientation: landscape) {
             .main-button, .final-button { width: 90px; height: 90px; }
-            .slider-knob { width: 90px; height: 90px; }
-            .slider-track { height: 75px; }
-            .slide-2-title, .quiz-title { font-size: 12px; padding: 40px 16px 10px; }
+            .slider-wrapper { max-width: 75%; }
+            .slider-knob { width: 80px; height: 80px; }
+            .slider-track { height: 70px; }
+            .slide-2-title, .quiz-title { font-size: 12px; top: 16%; }
             .warning-band.band-quiz { height: 50px; }
             .warning-band.band-final { height: 70px; }
             .warning-text { font-size: 8px; }
-            .slide-1-title { font-size: 12px; top: -55px; }
-            .slide-final-title { font-size: 12px; }
+            .slide-1-title { font-size: 12px; top: 9%; }
+            .slide-final-title { font-size: 12px; top: 9%; }
             .btn-ring-back { width: 115px; height: 115px; }
             .lang-buttons { top: 8px; right: 8px; }
             .lang-btn { width: 40px; height: 26px; }
-
-            /* Slide 14 landscape: același ca desktop — coloană centrată */
-            #slide14 .slide-1-center {
-                flex-direction: column;
-                gap: 12px;
-                max-width: 900px;
-                margin: 0 auto;
-            }
-            #slide14 .slide-final-title {
-                font-size: 10px;
-                line-height: 1.4;
-                letter-spacing: 0.5px;
-                white-space: normal;
-                text-align: center;
-                width: 100%;
-            }
-            #slide14 .btn-ring-wrap { flex-shrink: 0; }
+            .slide-1-content { padding: 0 20px; }
+            .slide-2-content { padding: 0 20px; }
+            .slide-quiz-content { padding: 0 20px; }
+            
+            .slide-2-content, .slide-quiz-content { gap: 0; }
+            #slide14 .slide-final-title { font-size: 10px; line-height: 1.4; letter-spacing: 0.5px; top: 9%; }
             #slide14 .final-button { width: 75px; height: 75px; }
             #slide14 .btn-ring-back { width: 100px; height: 100px; }
         }
-
-        /* Slide 1 landscape: titlu deasupra butonului, nu sare din ecran */
-        @media (max-height: 500px) and (orientation: landscape) {
-            .slide-1-center { gap: 0; }
-            .slide-1-title { 
-                top: auto;
-                position: relative;
-                left: auto;
-                transform: none;
-                margin-bottom: 8px;
-                font-size: 12px;
-                white-space: normal;
-                text-align: center;
-                width: 100%;
-            }
-            .slide-1-content {
-                flex-direction: column;
-                justify-content: center;
-                gap: 8px;
-            }
-        }
     </style>
     <base target="_blank">
+<base target="_blank">
 </head>
 <body>
 
@@ -588,8 +593,8 @@
                         <img src="butonru.png" alt="RU">
                     </button>
                 </div>
+                <h1 class="slide-1-title" id="title_start">ÎMPĂRTĂȘEȘTE-ȚI EXPERIENȚA</h1>
                 <div class="slide-1-center">
-                    <h1 class="slide-1-title" id="title_start">ÎMPĂRTĂȘEȘTE-ȚI EXPERIENȚA</h1>
                     <div class="btn-ring-wrap">
                         <div class="btn-ring-back"></div>
                         <button class="main-button" onclick="goToSlide(2)">
@@ -658,7 +663,7 @@
         <img class="slide-bg-cercuri" src="cercuri.png" alt="">
         <div class="content-area">
             <div class="slide-quiz-content">
-                <h2 class="quiz-title" id="q0">UTILIZAREA ȚIGĂRILOR ÎN TRANSPORT</h2>
+                <h2 class="quiz-title" id="q0">UTILIZAREA ȚIGARETELOR ÎN TRANSPORT</h2>
                 <div class="slider-wrapper" id="quiz0SliderWrapper">
                     <img src="roelemente.png" alt="" class="slider-bg-img">
                     <div class="slider-track" id="quiz0SliderTrack"></div>
@@ -694,7 +699,7 @@
         <img class="slide-bg-cercuri" src="cercuri.png" alt="">
         <div class="content-area">
             <div class="slide-quiz-content">
-                <h2 class="quiz-title" id="q2">UTILIZAREA ȚIGĂRILOR ÎN BAR</h2>
+                <h2 class="quiz-title" id="q2">UTILIZAREA ȚIGARETELOR ÎN BAR</h2>
                 <div class="slider-wrapper" id="quiz2SliderWrapper">
                     <img src="roelemente.png" alt="" class="slider-bg-img">
                     <div class="slider-track" id="quiz2SliderTrack"></div>
@@ -730,7 +735,7 @@
         <img class="slide-bg-cercuri" src="cercuri.png" alt="">
         <div class="content-area">
             <div class="slide-quiz-content">
-                <h2 class="quiz-title" id="q4">UTILIZAREA ȚIGĂRILOR ÎN CINEMA</h2>
+                <h2 class="quiz-title" id="q4">UTILIZAREA ȚIGARETELOR ÎN CINEMA</h2>
                 <div class="slider-wrapper" id="quiz4SliderWrapper">
                     <img src="roelemente.png" alt="" class="slider-bg-img">
                     <div class="slider-track" id="quiz4SliderTrack"></div>
@@ -766,7 +771,7 @@
         <img class="slide-bg-cercuri" src="cercuri.png" alt="">
         <div class="content-area">
             <div class="slide-quiz-content">
-                <h2 class="quiz-title" id="q6">UTILIZAREA ȚIGĂRILOR ÎN AVION</h2>
+                <h2 class="quiz-title" id="q6">UTILIZAREA ȚIGARETELOR ÎN AVION</h2>
                 <div class="slider-wrapper" id="quiz6SliderWrapper">
                     <img src="roelemente.png" alt="" class="slider-bg-img">
                     <div class="slider-track" id="quiz6SliderTrack"></div>
@@ -802,7 +807,7 @@
         <img class="slide-bg-cercuri" src="cercuri.png" alt="">
         <div class="content-area">
             <div class="slide-quiz-content">
-                <h2 class="quiz-title" id="q8">UTILIZAREA ȚIGĂRILOR ÎN AFARA CASEI</h2>
+                <h2 class="quiz-title" id="q8">UTILIZAREA ȚIGARETELOR AFARĂ</h2>
                 <div class="slider-wrapper" id="quiz8SliderWrapper">
                     <img src="roelemente.png" alt="" class="slider-bg-img">
                     <div class="slider-track" id="quiz8SliderTrack"></div>
@@ -820,7 +825,7 @@
         <img class="slide-bg-cercuri" src="cercuri.png" alt="">
         <div class="content-area">
             <div class="slide-quiz-content">
-                <h2 class="quiz-title" id="q9">UTILIZAREA PLICULEȚELOR CU NICOTINĂ ÎN AFARA CASEI</h2>
+                <h2 class="quiz-title" id="q9">UTILIZAREA PLICULEȚELOR CU NICOTINĂ AFARĂ</h2>
                 <div class="slider-wrapper" id="quiz9SliderWrapper">
                     <img src="roelemente.png" alt="" class="slider-bg-img">
                     <div class="slider-track" id="quiz9SliderTrack"></div>
@@ -838,12 +843,12 @@
         <img class="slide-bg-cercuri" src="cercuri.png" alt="">
         <div class="content-area">
             <div class="slide-final-content">
+                <h2 class="slide-final-title" id="final_title">
+                    VĂ MULȚUMIM PENTRU RĂSPUNSURI!<br>
+                    AȚI IDENTIFICAT <span id="scoreCount">5</span> SITUAȚII ÎN CARE PLICULEȚELE CU NICOTINĂ<br>
+                    NU AFECTEAZĂ PERSOANELE DIN JUR
+                </h2>
                 <div class="slide-1-center">
-                    <h2 class="slide-final-title" id="final_title">
-                        VĂ MULȚUMIM PENTRU RĂSPUNSURI!<br>
-                        AȚI IDENTIFICAT <span id="scoreCount">5</span> SITUAȚII ÎN CARE PLICULEȚELE CU NICOTINĂ<br>
-                        NU AFECTEAZĂ PERSOANELE DIN JUR
-                    </h2>
                     <div class="btn-ring-wrap">
                         <div class="btn-ring-back"></div>
                         <button class="final-button" onclick="goToSlide(1)">
@@ -881,8 +886,8 @@
                     "ИСПОЛЬЗОВАТЬ НИКОТИНОВЫЕ ПАУЧИ В КИНОТЕАТРЕ",
                     "ИСПОЛЬЗОВАТЬ СИГАРЕТЫ В САМОЛЁТЕ",
                     "ИСПОЛЬЗОВАТЬ НИКОТИНОВЫЕ ПАУЧИ В САМОЛЁТЕ",
-                    "ИСПОЛЬЗОВАТЬ СИГАРЕТЫ СНАРУЖИ ДОМА",
-                    "ИСПОЛЬЗОВАТЬ НИКОТИНОВЫЕ ПАУЧИ СНАРУЖИ ДОМА",
+                    "ИСПОЛЬЗОВАТЬ СИГАРЕТЫ НА УЛИЦЕ",
+                    "ИСПОЛЬЗОВАТЬ НИКОТИНОВЫЕ ПАУЧИ НА УЛИЦЕ",
                 ]
             },
             ro: {
@@ -894,16 +899,16 @@
                 warn_final: "UTILIZAREA PRODUSULUI POATE FI LIMITATĂ SAU INTERZISĂ ÎN ANUMITE LOCURI ÎN CONFORMITATE CU REGULILE STABILITE DE OPERATORUL SPAȚIULUI, TRANSPORTATOR SAU ANGAJATOR.<br><br>ACEST PRODUS NU ESTE LIPSIT DE RISCURI PENTRU SĂNĂTATE. CONȚINE NICOTINĂ CARE CREEAZĂ DEPENDENȚĂ.<br>ESTE DESTINAT EXCLUSIV CONSUMATORILOR ADULȚI DE TUTUN SAU PRODUSE CU NICOTINĂ.",
                 final_title: "VĂ MULȚUMIM PENTRU RĂSPUNSURI!<br>AȚI IDENTIFICAT {score} SITUAȚII ÎN CARE PLICULEȚELE CU NICOTINĂ<br>NU AFECTEAZĂ PERSOANELE DIN JUR",
                 questions: [
-                    "UTILIZAREA ȚIGĂRILOR ÎN TRANSPORT",
+                    "UTILIZAREA ȚIGARETELOR ÎN TRANSPORT",
                     "UTILIZAREA PLICULEȚELOR CU NICOTINĂ ÎN TRANSPORT",
-                    "UTILIZAREA ȚIGĂRILOR ÎN BAR",
+                    "UTILIZAREA ȚIGARETELOR ÎN BAR",
                     "UTILIZAREA PLICULEȚELOR CU NICOTINĂ ÎN BAR",
-                    "UTILIZAREA ȚIGĂRILOR ÎN CINEMA",
+                    "UTILIZAREA ȚIGARETELOR ÎN CINEMA",
                     "UTILIZAREA PLICULEȚELOR CU NICOTINĂ ÎN CINEMA",
-                    "UTILIZAREA ȚIGĂRILOR ÎN AVION",
+                    "UTILIZAREA ȚIGARETELOR ÎN AVION",
                     "UTILIZAREA PLICULEȚELOR CU NICOTINĂ ÎN AVION",
-                    "UTILIZAREA ȚIGĂRILOR ÎN AFARA CASEI",
-                    "UTILIZAREA PLICULEȚELOR CU NICOTINĂ ÎN AFARA CASEI",
+                    "UTILIZAREA ȚIGARETELOR AFARĂ",
+                    "UTILIZAREA PLICULEȚELOR CU NICOTINĂ AFARĂ",
                 ]
             }
         };
